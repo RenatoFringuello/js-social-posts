@@ -122,7 +122,7 @@ posts.forEach((post, i) => {
         <div class="post__footer">
             <div class="likes js-likes">
                 <div class="likes__cta">
-                    <a class="like-button" data-postid="${post.id}" id="js-like-button${post.id}">
+                    <a class="like-button js-like-button" data-postid="${post.id}">
                         <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
                         <span class="like-button__label">Mi Piace</span>
                     </a>
@@ -134,20 +134,23 @@ posts.forEach((post, i) => {
         </div>            
     </div> `;
     //append to the container
-    container.innerHTML += postEle;
+    container.innerHTML += postEle;    
+});
 
-    // on like btn click
-    const likeBtn = document.getElementById('js-like-button' + post.id);
+// on like btn click
+const likes = document.querySelectorAll('.js-likes');
+
+likes.forEach((like, i) => {
     let isLiked = false;
+    const likeBtn = like.childNodes[1].childNodes[1];
+    
     likeBtn.addEventListener('click', function(){
-        // toggle on boolean var
-        isLiked = !isLiked;
-        let like = (isLiked) ? parseInt(post.likes, 10) : parseInt(post.likes, 10) + 1;
-        
-        const likesCounter = document.getElementById(`like-counter-${post.id}`);
-        likesCounter.innerHTML = like;
-        
+        //toggle on boolean var
+        isLiked =!isLiked;
+        //change n like
+        const likeCounter = like.childNodes[3].childNodes[1];
+        likeCounter.innerHTML = (isLiked) ? parseInt(posts[i].likes, 10) + 1 : parseInt(posts[i].likes, 10);
+        //change color
         this.classList.toggle('like-button--liked');
-    });
-    console.log(likeBtn);
+    }, like, i);
 });
