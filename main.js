@@ -1,28 +1,8 @@
-/**
- * can create a element using tag, add a class,
- * append contents and assign attributes
- * 
- * @param {*} tag the tag of the element
- * @param {*} className the whole class list in a string
- * @param {*} contents a list of content to append
- * @param {*} attributes a list of attributes to assign; must be an array od literal objects {type:'', value:''}
- * @returns the element created
- */
-function createEle(tag, className, contents = [], attributes = []){
-    const element = document.createElement(tag);
-    element.className = className;
-    
-    contents.forEach((content) => {
-        element.append(content);
-    });
-    attributes.forEach((attribute) => {
-        element.setAttribute(attribute.type, attribute.value);
-    });
-
-    return element;
+function getInitials(string){
+    const nomeECognome = string.split(' ');
+    return nomeECognome[0].charAt(0) + nomeECognome[1].charAt(0);
 }
 
-//init
 /**
  * "id": 1, ordine di arrivo
  * "content": "Placeat libero ipsa nobis ipsum quibusdam quas harum ut. Distinctio minima iusto. Ad ad maiores et sint voluptate recusandae architecto. Et nihil ullam aut alias.",
@@ -95,20 +75,12 @@ const postLikedIds = [];
 const container = document.getElementById('container');
 
 posts.forEach((post, i) => {
-    //like btn
-    // const likeBtnIcon = createEle('i', 'like-button__icon fas fa-thumbs-up', [], [{type:'aria-hidden', value:'true'}]);
-    // const likeBtnSpan = createEle('span', 'like-button__label', ['Mi Piace']);
-    // const likeBtn = createEle('a', 'like-button  js-like-button', [likeBtnIcon, likeBtnSpan], [{type:'href', value:'#'}]);
-    // //like counter
-    // const likeCounter = createEle('b', 'js-likes-counter', ['like count'], [{type:'id', value:'like-counter-' + i}]);
-    // const likesCounter = createEle('div', 'likes__counter', [`Piace a ${likeCounter} persone`]);
-    
     const postEle = `
     <div class="post">
         <div class="post__header">
             <div class="post-meta">                    
                 <div class="post-meta__icon">
-                    <img class="profile-pic" src="${post.author.image}" alt="${post.author.name} img">                    
+                    <img class="profile-pic profile-pic-default" src="${post.author.image}" alt="${getInitials(post.author.name)}">                    
                 </div>
                 <div class="post-meta__data">
                     <div class="post-meta__author">${post.author.name}</div>
@@ -163,5 +135,4 @@ likes.forEach((like, i) => {
         }
         console.log(postLikedIds);
     }, like, i);
-    
 });
