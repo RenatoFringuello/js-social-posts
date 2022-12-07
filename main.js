@@ -91,6 +91,7 @@ const posts = [
         "created": "2021-03-05"
     }
 ];
+const postLikedIds = [];
 const container = document.getElementById('container');
 
 posts.forEach((post, i) => {
@@ -152,5 +153,15 @@ likes.forEach((like, i) => {
         likeCounter.innerHTML = (isLiked) ? parseInt(posts[i].likes, 10) + 1 : parseInt(posts[i].likes, 10);
         //change color
         this.classList.toggle('like-button--liked');
+        //save id
+        if(postLikedIds.includes(posts[i].id)){
+            //rimuovilo
+            postLikedIds.splice(postLikedIds.indexOf(posts[i].id), 1);
+        }
+        else{
+            postLikedIds.push(posts[i].id);
+        }
+        console.log(postLikedIds);
     }, like, i);
+    
 });

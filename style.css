@@ -116,11 +116,11 @@ h1 {
     -moz-user-select: none;
 }
 
-.like-button:not(.like-button--liked):hover {
+.like-button:hover {
     background-color: #e3e3e3
 }
 
-.like-button:not(.like-button--liked):active {
+.like-button:active {
     background-color: #bdbec4
 }
 
@@ -130,5 +130,4 @@ h1 {
 
 .like-button--liked {
     color: #0CD977;
-    cursor: default;
 }
